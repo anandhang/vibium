@@ -1,6 +1,6 @@
 /**
- * JS Library Tests: Headless and Headed Modes
- * Tests that both browser modes work correctly
+ * JS Library Tests: Browser Modes
+ * Tests headless, visible, and default launch options
  */
 
 const { test, describe } = require('node:test');
@@ -37,8 +37,14 @@ describe('JS Browser Modes', () => {
     }
   });
 
-  test('default is headless', async () => {
-    // browser.launch() without options should default to headless
+  test('default is visible (not headless)', async () => {
+    // Skip in CI environments where display is not available
+    if (process.env.CI || process.env.GITHUB_ACTIONS) {
+      console.log('  (skipped: no display in CI)');
+      return;
+    }
+
+    // browser.launch() without options should default to visible
     const vibe = await browser.launch();
     try {
       await vibe.go('https://the-internet.herokuapp.com/');

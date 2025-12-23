@@ -136,7 +136,7 @@ Once added, start a new Claude Code session and ask Claude to use browser automa
 ```
 
 Claude will use the Vibium MCP tools:
-1. `browser_launch` - Start a headless browser
+1. `browser_launch` - Start the browser
 2. `browser_navigate` - Go to the URL
 3. `browser_screenshot` - Capture the page
 4. `browser_quit` - Close the browser
@@ -145,7 +145,7 @@ Claude will use the Vibium MCP tools:
 
 | Tool | Description |
 |------|-------------|
-| `browser_launch` | Start a browser session (headless by default) |
+| `browser_launch` | Start a browser session (visible by default) |
 | `browser_navigate` | Navigate to a URL |
 | `browser_click` | Click an element by CSS selector |
 | `browser_type` | Type text into an element |

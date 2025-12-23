@@ -15,39 +15,43 @@ This automatically downloads Chrome for Testing on first install.
 ### Async API
 
 ```javascript
-import { browser } from 'vibium';
-import { writeFile } from 'fs/promises';
+import { browser } from 'vibium'
+import { writeFile } from 'fs/promises'
+// In a REPL: const { browser } = require('vibium')
+// In a REPL: const { writeFile } = require('fs/promises')
 
-const vibe = await browser.launch();
-await vibe.go('https://example.com');
+const vibe = await browser.launch()
+await vibe.go('https://example.com')
 
-const link = await vibe.find('a');
-console.log(await link.text());
-await link.click();
+const link = await vibe.find('a')
+console.log(await link.text())
+await link.click()
 
-const screenshot = await vibe.screenshot();
-await writeFile('screenshot.png', screenshot);
+const screenshot = await vibe.screenshot()
+await writeFile('screenshot.png', screenshot)
 
-await vibe.quit();
+await vibe.quit()
 ```
 
 ### Sync API
 
 ```javascript
-import { browserSync } from 'vibium';
-import { writeFileSync } from 'fs';
+import { browserSync } from 'vibium'
+import { writeFileSync } from 'fs'
+// In a REPL: const { browserSync } = require('vibium')
+// In a REPL: const { writeFileSync } = require('fs')
 
-const vibe = browserSync.launch();
-vibe.go('https://example.com');
+const vibe = browserSync.launch()
+vibe.go('https://example.com')
 
-const link = vibe.find('a');
-console.log(link.text());
-link.click();
+const link = vibe.find('a')
+console.log(link.text())
+link.click()
 
-const screenshot = vibe.screenshot();
-writeFileSync('screenshot.png', screenshot);
+const screenshot = vibe.screenshot()
+writeFileSync('screenshot.png', screenshot)
 
-vibe.quit();
+vibe.quit()
 ```
 
 ## API Reference
@@ -57,7 +61,7 @@ vibe.quit();
 Launch a new browser session.
 
 ```javascript
-const vibe = await browser.launch({ headless: true });
+const vibe = await browser.launch({ headless: true })
 ```
 
 | Option | Type | Default | Description |
@@ -69,7 +73,7 @@ const vibe = await browser.launch({ headless: true });
 Navigate to a URL.
 
 ```javascript
-await vibe.go('https://example.com');
+await vibe.go('https://example.com')
 ```
 
 ### vibe.find(selector, options?)
@@ -77,7 +81,7 @@ await vibe.go('https://example.com');
 Find an element by CSS selector.
 
 ```javascript
-const button = await vibe.find('button.submit');
+const button = await vibe.find('button.submit')
 ```
 
 | Option | Type | Default | Description |
@@ -89,7 +93,7 @@ const button = await vibe.find('button.submit');
 Capture a screenshot. Returns a `Buffer` (PNG).
 
 ```javascript
-const png = await vibe.screenshot();
+const png = await vibe.screenshot()
 ```
 
 ### vibe.quit()
@@ -97,7 +101,7 @@ const png = await vibe.screenshot();
 Close the browser session.
 
 ```javascript
-await vibe.quit();
+await vibe.quit()
 ```
 
 ### element.click(options?)
@@ -105,7 +109,7 @@ await vibe.quit();
 Click the element. Waits for element to be visible, stable, and enabled.
 
 ```javascript
-await element.click();
+await element.click()
 ```
 
 | Option | Type | Default | Description |
@@ -117,7 +121,7 @@ await element.click();
 Type text into the element. Waits for element to be visible, stable, enabled, and editable.
 
 ```javascript
-await element.type('hello@example.com');
+await element.type('hello@example.com')
 ```
 
 | Option | Type | Default | Description |
@@ -129,7 +133,7 @@ await element.type('hello@example.com');
 Get the element's text content.
 
 ```javascript
-const text = await element.text();
+const text = await element.text()
 ```
 
 ### element.getAttribute(name)
@@ -137,7 +141,7 @@ const text = await element.text();
 Get an attribute value.
 
 ```javascript
-const testId = await element.getAttribute('data-testid');
+const testId = await element.getAttribute('data-testid')
 ```
 
 ### element.boundingBox()
@@ -145,7 +149,7 @@ const testId = await element.getAttribute('data-testid');
 Get the element's position and size. Returns `{x, y, width, height}`.
 
 ```javascript
-const box = await element.boundingBox();
+const box = await element.boundingBox()
 ```
 
 ## Environment Variables

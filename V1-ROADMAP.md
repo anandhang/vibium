@@ -654,7 +654,7 @@ echo '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"capabilities":{}}
 Implement tools/list with schemas:
 
 browser_launch:
-  - headless: boolean (default true)
+  - headless: boolean (default false)
   
 browser_navigate:
   - url: string (required)

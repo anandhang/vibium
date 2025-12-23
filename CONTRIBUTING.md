@@ -113,7 +113,7 @@ After building, the binary is at `./clicker/bin/clicker`.
 ### Useful Flags
 
 ```bash
---headed          # Show the browser window (headless by default)
+--headless        # Hide the browser window (visible by default)
 --wait-open 5     # Wait 5 seconds after navigation for page to load
 --wait-close 3    # Keep browser open 3 seconds before closing
 ```
@@ -121,7 +121,7 @@ After building, the binary is at `./clicker/bin/clicker`.
 Example:
 
 ```bash
-./clicker/bin/clicker screenshot https://example.com --headed --wait-close 5 -o shot.png
+./clicker/bin/clicker screenshot https://example.com --wait-close 5 -o shot.png
 ```
 
 ---

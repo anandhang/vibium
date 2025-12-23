@@ -30,8 +30,8 @@ export class ClickerProcess {
     if (port > 0) {
       args.push('--port', port.toString());
     }
-    if (options.headless === false) {
-      args.push('--headed');
+    if (options.headless === true) {
+      args.push('--headless');
     }
 
     const proc = spawn(binaryPath, args, {

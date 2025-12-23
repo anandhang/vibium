@@ -116,7 +116,7 @@ That's it. No `npm install` needed. The first run downloads everything automatic
 
 | Tool | Description |
 |------|-------------|
-| `browser_launch` | Start browser (headless by default) |
+| `browser_launch` | Start browser (visible by default) |
 | `browser_navigate` | Go to URL |
 | `browser_find` | Find element by CSS selector |
 | `browser_click` | Click an element |

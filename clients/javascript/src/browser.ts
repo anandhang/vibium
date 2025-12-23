@@ -11,7 +11,7 @@ export interface LaunchOptions {
 
 export const browser = {
   async launch(options: LaunchOptions = {}): Promise<Vibe> {
-    const { headless = true, port, executablePath } = options;
+    const { headless = false, port, executablePath } = options;
     debug('launching browser', { headless, port, executablePath });
 
     // Start the clicker process

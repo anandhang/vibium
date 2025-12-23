@@ -105,7 +105,7 @@ vibium/
 │   │   ├── async-api.test.js
 │   │   ├── sync-api.test.js
 │   │   ├── auto-wait.test.js
-│   │   ├── headless-headed.test.js
+│   │   ├── browser-modes.test.js
 │   │   └── process.test.js
 │   └── mcp/                              # MCP server tests
 │       └── server.test.js

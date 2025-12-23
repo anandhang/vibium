@@ -23,7 +23,7 @@ var version = "0.1.0"
 
 // Global flags
 var (
-	headed    bool
+	headless  bool
 	waitOpen  int
 	waitClose int
 	verbose   bool
@@ -74,9 +74,9 @@ func main() {
 	}
 
 	// Add global flags for browser commands
-	rootCmd.PersistentFlags().BoolVar(&headed, "headed", false, "Show browser window (not headless)")
+	rootCmd.PersistentFlags().BoolVar(&headless, "headless", false, "Hide browser window (visible by default)")
 	rootCmd.PersistentFlags().IntVar(&waitOpen, "wait-open", 0, "Seconds to wait after navigation for page to load")
-	rootCmd.PersistentFlags().IntVar(&waitClose, "wait-close", 0, "Seconds to keep browser open before closing (0 with --headed = wait for Enter)")
+	rootCmd.PersistentFlags().IntVar(&waitClose, "wait-close", 0, "Seconds to keep browser open before closing")
 	rootCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "Enable debug logging")
 
 	rootCmd.AddCommand(&cobra.Command{
@@ -135,7 +135,7 @@ func main() {
 		Use:   "launch-test",
 		Short: "Launch browser via chromedriver and print BiDi WebSocket URL",
 		Run: func(cmd *cobra.Command, args []string) {
-			result, err := browser.Launch(browser.LaunchOptions{Headless: !headed})
+			result, err := browser.Launch(browser.LaunchOptions{Headless: headless})
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "Error: %v\n", err)
 				os.Exit(1)
@@ -245,7 +245,7 @@ func main() {
 				url := args[0]
 
 				fmt.Println("Launching browser...")
-				launchResult, err := browser.Launch(browser.LaunchOptions{Headless: !headed})
+				launchResult, err := browser.Launch(browser.LaunchOptions{Headless: headless})
 				if err != nil {
 					fmt.Fprintf(os.Stderr, "Error launching browser: %v\n", err)
 					os.Exit(1)
@@ -288,7 +288,7 @@ func main() {
 				output, _ := cmd.Flags().GetString("output")
 
 				fmt.Println("Launching browser...")
-				launchResult, err := browser.Launch(browser.LaunchOptions{Headless: !headed})
+				launchResult, err := browser.Launch(browser.LaunchOptions{Headless: headless})
 				if err != nil {
 					fmt.Fprintf(os.Stderr, "Error launching browser: %v\n", err)
 					os.Exit(1)
@@ -353,7 +353,7 @@ func main() {
 				expression := args[1]
 
 				fmt.Println("Launching browser...")
-				launchResult, err := browser.Launch(browser.LaunchOptions{Headless: !headed})
+				launchResult, err := browser.Launch(browser.LaunchOptions{Headless: headless})
 				if err != nil {
 					fmt.Fprintf(os.Stderr, "Error launching browser: %v\n", err)
 					os.Exit(1)
@@ -403,7 +403,7 @@ func main() {
 				selector := args[1]
 
 				fmt.Println("Launching browser...")
-				launchResult, err := browser.Launch(browser.LaunchOptions{Headless: !headed})
+				launchResult, err := browser.Launch(browser.LaunchOptions{Headless: headless})
 				if err != nil {
 					fmt.Fprintf(os.Stderr, "Error launching browser: %v\n", err)
 					os.Exit(1)
@@ -459,7 +459,7 @@ func main() {
 				timeout, _ := cmd.Flags().GetDuration("timeout")
 
 				fmt.Println("Launching browser...")
-				launchResult, err := browser.Launch(browser.LaunchOptions{Headless: !headed})
+				launchResult, err := browser.Launch(browser.LaunchOptions{Headless: headless})
 				if err != nil {
 					fmt.Fprintf(os.Stderr, "Error launching browser: %v\n", err)
 					os.Exit(1)
@@ -536,7 +536,7 @@ func main() {
 				timeout, _ := cmd.Flags().GetDuration("timeout")
 
 				fmt.Println("Launching browser...")
-				launchResult, err := browser.Launch(browser.LaunchOptions{Headless: !headed})
+				launchResult, err := browser.Launch(browser.LaunchOptions{Headless: headless})
 				if err != nil {
 					fmt.Fprintf(os.Stderr, "Error launching browser: %v\n", err)
 					os.Exit(1)
@@ -609,7 +609,7 @@ func main() {
 				selector := args[1]
 
 				fmt.Println("Launching browser...")
-				launchResult, err := browser.Launch(browser.LaunchOptions{Headless: !headed})
+				launchResult, err := browser.Launch(browser.LaunchOptions{Headless: headless})
 				if err != nil {
 					fmt.Fprintf(os.Stderr, "Error launching browser: %v\n", err)
 					os.Exit(1)
@@ -657,13 +657,13 @@ func main() {
 		Use:   "serve",
 		Short: "Start WebSocket proxy server for browser automation",
 		Example: `  clicker serve
-  # Starts server on default port 9515, headless mode
+  # Starts server on default port 9515, visible browser
 
   clicker serve --port 8080
   # Starts server on port 8080
 
-  clicker serve --headed
-  # Starts server with visible browser windows`,
+  clicker serve --headless
+  # Starts server with headless browser`,
 		Run: func(cmd *cobra.Command, args []string) {
 			process.WithCleanup(func() {
 				port, _ := cmd.Flags().GetInt("port")
@@ -671,7 +671,7 @@ func main() {
 				fmt.Printf("Starting Clicker proxy server on port %d...\n", port)
 
 				// Create router to manage browser sessions
-				router := proxy.NewRouter(!headed)
+				router := proxy.NewRouter(headless)
 
 				server := proxy.NewServer(
 					proxy.WithPort(port),

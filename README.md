@@ -2,9 +2,21 @@
 
 **Browser automation without the drama.**
 
-Vibium is browser automation infrastructure built for AI agents. A single binary handles browser lifecycle, WebDriver BiDi protocol, and exposes an MCP server — so Claude Code (or any MCP client) can drive a browser with zero setup. Works great for AI agents, test automation, and anything else that needs a browser.
+Vibium is browser automation infrastructure built for AI agents. A single binary handles browser lifecycle, [WebDriver BiDi](docs/explanation/webdriver-bidi.md) protocol, and exposes an MCP server — so Claude Code (or any MCP client) can drive a browser with zero setup. Works great for AI agents, test automation, and anything else that needs a browser.
 
 **New here?** [Getting Started Tutorial](docs/tutorials/getting-started.md) — zero to hello world in 5 minutes.
+
+---
+
+## Why Vibium?
+
+**Browser automation for AI agents and humans.**
+
+- **AI-native.** MCP server built-in. Claude Code can drive a browser out of the box.
+- **Zero config.** One install, browser downloads automatically, visible by default.
+- **Sync API.** No async/await ceremony. Perfect for scripts, REPLs, and agents.
+- **Standards-based.** Built on [WebDriver BiDi](docs/explanation/webdriver-bidi.md), not proprietary protocols controlled by large corporations.
+- **Lightweight.** Single ~10MB binary. No runtime dependencies.
 
 ---
 
@@ -14,6 +26,7 @@ Vibium is browser automation infrastructure built for AI agents. A single binary
 |-----------|---------|-----------|
 | **Clicker** | Browser automation, BiDi proxy, MCP server | CLI / stdio / WebSocket :9515 |
 | **JS Client** | Developer-facing API | npm package |
+| **Python Client** | Developer-facing API | pip package |
 
 ---
 
@@ -43,8 +56,8 @@ Vibium is browser automation infrastructure built for AI agents. A single binary
                       │ WebSocket BiDi :9515
                       ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                        JS/TS Client                         │
-│                     npm install vibium                      │
+│                       Client Libraries                       │
+│           npm install vibium  ·  pip install vibium          │
 │                                                             │
 │    ┌─────────────────┐               ┌─────────────────┐    │
 │    │ Async API       │               │    Sync API     │    │
@@ -115,6 +128,48 @@ await link.click()
 await vibe.quit()
 ```
 
+### Python Client
+
+```python
+from vibium import browser, browser_sync
+```
+
+**Sync API:**
+```python
+from vibium import browser_sync as browser
+
+vibe = browser.launch()
+vibe.go("https://example.com")
+
+png = vibe.screenshot()
+with open("screenshot.png", "wb") as f:
+    f.write(png)
+
+link = vibe.find("a")
+link.click()
+vibe.quit()
+```
+
+**Async API:**
+```python
+import asyncio
+from vibium import browser
+
+async def main():
+    vibe = await browser.launch()
+    await vibe.go("https://example.com")
+
+    png = await vibe.screenshot()
+    with open("screenshot.png", "wb") as f:
+        f.write(png)
+
+    link = await vibe.find("a")
+    await link.click()
+    await vibe.quit()
+
+asyncio.run(main())
+```
+
 ---
 
 ## For Agents
@@ -142,7 +197,8 @@ That's it. No manual steps needed. Chrome downloads automatically during setup.
 ## For Humans
 
 ```bash
-npm install vibium
+npm install vibium   # JavaScript/TypeScript
+pip install vibium   # Python
 ```
 
 This automatically:
@@ -204,7 +260,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and guidelines.
 V1 focuses on the core loop: browser control via MCP and JS client.
 
 See [V2-ROADMAP.md](V2-ROADMAP.md) for planned features:
-- Python and Java clients
+- Java client
 - Cortex (memory/navigation layer)
 - Retina (recording extension)
 - Video recording
@@ -214,6 +270,7 @@ See [V2-ROADMAP.md](V2-ROADMAP.md) for planned features:
 
 ## Updates
 
+- [2025-12-31: Python Client](docs/updates/2025-12-31-python-client.md)
 - [2025-12-22: Day 12 - Published to npm](docs/updates/2025-12-22-day12-npm-publish.md)
 - [2025-12-21: Day 11 - Polish & Error Handling](docs/updates/2025-12-21-day11-polish.md)
 - [2025-12-20: Day 10 - MCP Server](docs/updates/2025-12-20-day10-mcp.md)

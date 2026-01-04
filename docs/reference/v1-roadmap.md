@@ -1,5 +1,7 @@
 # Vibium V1 Roadmap
 
+> **Archived:** V1 shipped December 2025. This document is preserved as historical reference.
+
 **Target: 2 weeks to MVP**
 **Scope: Clicker (Go) + JS/TS Client (async + sync) + MCP Server**
 **Pitch: "Browser automation without the drama."**
@@ -948,11 +950,11 @@ Create docs/api.md:
 - ✅ Clean shutdown in all scenarios
 
 ### Platforms
-- [ ] Linux x64
+- ✅ Linux x64
 - [ ] Linux arm64
 - ✅ macOS x64
 - ✅ macOS arm64
-- [ ] Windows x64
+- ✅ Windows x64
 
 ### Distribution
 - ✅ npm install vibium works

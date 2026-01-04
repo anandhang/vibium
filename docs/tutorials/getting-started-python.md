@@ -1,7 +1,5 @@
 # Getting Started with Vibium (Python)
 
-> **Coming Soon!** The Python client is not yet published to PyPI. Check back soon or use the [JavaScript client](getting-started.md) in the meantime.
-
 A complete beginner's guide. No prior experience required.
 
 ---
@@ -112,7 +110,7 @@ print("Done!")
 ## Step 5: Run It
 
 ```bash
-python hello.py
+python3 hello.py
 ```
 
 You should see:
